@@ -1,6 +1,8 @@
 // This module will be used to create and control/store recipes array and associated functions
 import "./scss/recipes.scss";
-
+import uuidv4 from "uuid/v4";
+import moment from "moment";
+// import { getFilters } from "./filters";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
 
@@ -66,4 +68,88 @@ const saveRecipes = () => {
       console.error("Error writing document: ", error);
       // maybe I will update DOM with error message
     });
+};
+
+// Function to create a new recipe
+const createRecipe = () => {
+  const id = uuidv4();
+  const time = moment().valueOf();
+
+  recipes.push({
+    id,
+    createdAt: time,
+    updatedAt: time,
+    title: "",
+    body: "",
+    ingredients: []
+  });
+  saveRecipes();
+  return id;
+};
+
+// function to remove a recipe
+const removeRecipe = id => {
+  const index = recipes.findIndex(i => i.id === id);
+  recipes.splice(index, 1);
+  saveRecipes();
+};
+
+// Function to update Recipes
+const updateRecipe = (id, { title, body }) => {
+  // find the recipe
+  const recipe = recipes.find(i => i.id === id);
+  if (!recipe) {
+    return;
+  }
+
+  if (typeof title === "string") {
+    recipe.title = title;
+    recipe.updatedAt = moment().valueOf();
+  }
+  if (typeof body === "string") {
+    recipe.body = body;
+    recipe.updatedAt = moment().valueOf();
+  }
+
+  saveRecipes();
+};
+
+// a function to sort recipes
+const sortRecipes = ({ sortBy }) => {
+  if (sortBy == "byCreated") {
+    return recipes.sort((a, b) => {
+      if (a.createdAt > b.createdAt) {
+        return -1;
+      } else if (b.createdAt > a.createdAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === "byEdited") {
+    return recipes.sort((a, b) => {
+      if (a.updatedAt > b.updatedAt) {
+        return -1;
+      } else if (b.updatedAt > a.updatedAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else {
+    return recipes;
+  }
+};
+
+// calling loadrecipes to load the recipes and initiate the program
+loadRecipes();
+
+// setting up exports
+export {
+  getRecipes,
+  loadRecipes,
+  createRecipe,
+  removeRecipe,
+  updateRecipe,
+  sortRecipes
 };
