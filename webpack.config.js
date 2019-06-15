@@ -5,7 +5,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: {
     index: ["babel-polyfill", "./src/index.js"],
-    recipes: ["babel-polyfill", "./src/recipes.js"]
+    recipes: ["babel-polyfill", "./src/recipes.js"],
+    update: ["babel-polyfill", "./src/update.js"]
   },
   output: {
     path: path.resolve(__dirname, "public/scripts"),
