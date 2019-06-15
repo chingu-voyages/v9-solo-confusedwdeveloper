@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css?family=Karla|Rubik"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles/recipes.css">
+    <link rel="stylesheet" href="./styles/recipes.css" />
     <title>Your Favourite Recipes</title>
   </head>
   <body>
@@ -55,18 +55,83 @@
     <div class="container" style="background: rgba(47,59,84, 0.7);">
       <section id="recipe-filters">
         <div class="form-row text-white justify-content-around">
-            <div class="form-group col-sm-4">
-                <label for="texxt-filter">Filter</label>
-                <input type="text" class="form-control" id="texxt-filter">
-              </div>
-              <div class="form-group col-sm-3">
-                <label for="dropdown-filter">Sort By</label>
-                <select id="dropdown-filter" class="form-control">
-                    <option value="byEdited">Sort by last Edited</option>
-                    <option value="byCreated">Sort by recently created</option>
-                </select>
+          <div class="form-group col-md-4">
+            <label for="text-filter">Filter</label>
+            <input
+              type="text"
+              placeholder="Filter"
+              class="form-control"
+              id="text-filter"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="dropdown-filter">Sort By</label>
+            <select id="dropdown-filter" class="form-control">
+              <option value="byEdited">Sort by last Edited</option>
+              <option value="byCreated">Sort by recently created</option>
+            </select>
+          </div>
         </div>
-         
+      </section>
+      <section class="recipes pt-5">
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header"><h3>First Recipe</h3></div>
+              <div class="card-body">
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+                  eligendi doloribus amet corrupti neque. Exercitationem
+                  asperiores ducimus enim soluta molestiae amet impedit quas,
+                  esse odit magni ipsam ex alias commodi.
+                </p>
+              </div>
+              <div class="card-footer">Your have some of the ingredients</div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header"><h3>Second Recipe</h3></div>
+              <div class="card-body">
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+                  eligendi doloribus amet corrupti neque. Exercitationem
+                  asperiores ducimus enim soluta molestiae amet impedit quas,
+                  esse odit magni ipsam ex alias commodi.
+                </p>
+              </div>
+              <div class="card-footer">Your have none of the ingredients</div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header"><h3>Third Recipe</h3></div>
+              <div class="card-body">
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+                  eligendi doloribus amet corrupti neque. Exercitationem
+                  asperiores ducimus enim soluta molestiae amet impedit quas,
+                  esse odit magni ipsam ex alias commodi.
+                </p>
+              </div>
+              <div class="card-footer">Your have one of the ingredients</div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header"><h3>Fourth Recipe</h3></div>
+              <div class="card-body">
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+                  eligendi doloribus amet corrupti neque. Exercitationem
+                  asperiores ducimus enim soluta molestiae amet impedit quas,
+                  esse odit magni ipsam ex alias commodi.
+                </p>
+              </div>
+              <div class="card-footer">Your have all of the ingredients</div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script
