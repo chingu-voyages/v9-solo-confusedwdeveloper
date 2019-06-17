@@ -14,7 +14,7 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1 fixed-top">
-      <a id="project-title" class="navbar-brand" href="#"
+      <a id="project-title" class="navbar-brand" href="/recipes.html"
         >Your Favourite Recipes</a
       >
       <button
@@ -35,7 +35,7 @@
             <a class="nav-link" href="/recipes.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Account</a>
+            <a class="nav-link" href="#mymodal" data-toggle="modal">Account</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#ingredients">Ingredients</a>
@@ -49,7 +49,7 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a id="logout" class="nav-link" href="#">Logout</a>
           </li>
         </ul>
       </div>
@@ -180,6 +180,42 @@
       </section>
       <h3 class="text-center text-white">Danger Zone</h3>
       <button class="btn-danger btn d-block mx-auto my-4">Remove Recipe</button>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="mymodal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="mymodalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="mymodalTitle">Account</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -1,5 +1,9 @@
 @import "./custom_bootstrap";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: url("./img/img.jpg");
   background-size: cover;
