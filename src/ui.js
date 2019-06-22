@@ -55,7 +55,9 @@ const setUpNavbar = user => {
       });
   });
   modalBody.appendChild(setUpModalBody(user));
+};
 
+const setupCreateRecipeButton = user => {
   // set up create recipe button
   const createRecipeButton = document.querySelector("#go-to-update");
   createRecipeButton.addEventListener("click", e => {
@@ -84,4 +86,5 @@ const setUpNavbar = user => {
       });
   });
 };
-export { setUpNavbar };
+
+export { setUpNavbar, getRecipes, setupCreateRecipeButton };

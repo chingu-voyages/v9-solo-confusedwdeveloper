@@ -58,17 +58,28 @@
       <form id="update-form">
         <div class="form-group">
           <label for="update-title">Recipe Title</label>
-          <input type="text" class="form-control" id="update-title" />
+          <input
+            name="title"
+            type="text"
+            class="form-control"
+            id="update-title"
+          />
         </div>
         <div class="form-group">
-          <label for="update-body">Recipe</label>
-          <textarea class="form-control" id="update-body" rows="10"></textarea>
+          <label for="update-body">Recipe Body</label>
+          <textarea
+            name="body"
+            class="form-control"
+            id="update-body"
+            rows="10"
+          ></textarea>
         </div>
         <div class="d-flex justify-content-between" id="button-and-moment">
           <button class="btn-success btn">Save Recipe</button>
-          <span class="text-secondary d-none d-md-inline"
-            >Last updated 1 min ago.</span
-          >
+          <span
+            id="update-span"
+            class="text-secondary d-none d-md-inline"
+          ></span>
         </div>
       </form>
       <h2 id="ingredient-title" class="my-5 text-center">Ingredients</h2>
@@ -165,7 +176,7 @@
             <button class="btn btn-link">Remove</button>
           </div>
         </div>
-        <form class="form-inline my-5 justify-content-center">
+        <form class="form-inline my-5">
           <label class="sr-only" for="inlineFormInputName2"
             >Add Ingredient</label
           >
@@ -173,9 +184,11 @@
             type="text"
             class="form-control mr-sm-2"
             id="inlineFormInputName2"
-            placeholder="Add"
+            placeholder="New Ingredient"
           />
-          <button class="btn btn-success ml-5">Add</button>
+          <button class="btn btn-success mt-2 mt-md-auto">
+            Add Ingredient
+          </button>
         </form>
       </section>
       <h3 class="text-center text-white">Danger Zone</h3>
