@@ -3,7 +3,8 @@ import "./scss/recipes.scss";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
 import { setUpNavbar } from "./ui";
-import { renderUpdate, setupUpdateForm } from "./setup-update";
+import { setupUpdateForm, addIngredientForm } from "./setup-update";
+import { renderUpdate } from "./update-view";
 
 // Add the Firebase products that you want to use
 import "firebase/auth";
@@ -17,10 +18,19 @@ const recipeId = location.hash.substring(1);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     setUpNavbar(user);
-    renderUpdate(user, recipeId);
+    // renderUpdate(user, recipeId);
+    // setting up realtime update
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid)
+      .onSnapshot(doc => {
+        const recipes = doc.data().recipes;
+        renderUpdate(recipes, recipeId);
+      });
+
     setupUpdateForm(user, recipeId);
-    console.log(user);
-    console.log(recipeId);
+    addIngredientForm(user, recipeId);
   } else {
     location.assign("/index.html");
   }

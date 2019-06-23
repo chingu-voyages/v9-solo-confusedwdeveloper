@@ -6,6 +6,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import moment from "moment";
 import { getRecipes } from "./ui";
+import uuidv4 from "uuid/v4";
 
 // function to setup update form
 const setupUpdateForm = async (user, recipeId) => {
@@ -31,28 +32,46 @@ const setupUpdateForm = async (user, recipeId) => {
       });
     e.target.elements.title.value = "";
     e.target.elements.body.value = "";
-    renderUpdate(user, recipeId);
+    // renderUpdate(user, recipeId);
   });
 };
 
-// function to set up update.js
-const renderUpdate = (user, recipeId) => {
-  const updateSpan = document.querySelector("#update-span");
-  const titleEl = document.querySelector("#update-title");
-  const bodyEl = document.querySelector("#update-body");
-  getRecipes(user).then(recipes => {
-    const recipe = recipes.find(i => i.id === recipeId);
-    if (!recipe) {
-      location.assign("/recipes.html");
-    }
-    updateSpan.textContent = `Last updated ${moment(
-      recipe.updatedAt
-    ).fromNow()}.`;
+// function to set up add ingredient form
+const addIngredientForm = async (user, recipeId) => {
+  const form = document.querySelector("#add-ingredient-form");
 
-    // set up update form
-    titleEl.value = recipe.title;
-    bodyEl.value = recipe.body;
+  // getting recipes
+  const recipes = await getRecipes(user);
+  const recipe = recipes.find(i => i.id === recipeId);
+  if (!recipe) {
+    location.assign("/recipes.html");
+  }
+  const ingredients = recipe.ingredients;
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const text = e.target.elements.newIngredient.value.trim();
+    const id = uuidv4();
+    const ingredient = {
+      id,
+      text,
+      completed: false
+    };
+    //adding to array
+    ingredients.push(ingredient);
+
+    // updating timestamp
+    recipe.updatedAt = moment().valueOf();
+
+    //saving to database
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid)
+      .set({
+        recipes: recipes
+      });
+    form.reset();
   });
 };
 
-export { renderUpdate, setupUpdateForm };
+export { setupUpdateForm, addIngredientForm };
