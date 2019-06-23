@@ -7,14 +7,17 @@ import "firebase/firestore";
 import moment from "moment";
 import { getRecipes } from "./ui";
 import uuidv4 from "uuid/v4";
+import { renderUpdate } from "./update-view";
+import { getFilters, setFilters } from "./filters";
+import { unsubscribe } from "./update";
 
 // function to setup update form
 const setupUpdateForm = async (user, recipeId) => {
   const recipes = await getRecipes(user);
   const recipe = recipes.find(i => i.id === recipeId);
-  if (!recipe) {
-    location.assign("/recipes.html");
-  }
+  // if (!recipe) {
+  //   location.assign("/recipes.html");
+  // }
   const updateForm = document.querySelector("#update-form");
   updateForm.addEventListener("submit", e => {
     e.preventDefault();
@@ -43,9 +46,9 @@ const addIngredientForm = async (user, recipeId) => {
   // getting recipes
   const recipes = await getRecipes(user);
   const recipe = recipes.find(i => i.id === recipeId);
-  if (!recipe) {
-    location.assign("/recipes.html");
-  }
+  // if (!recipe) {
+  //   location.assign("/recipes.html");
+  // }
   const ingredients = recipe.ingredients;
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -74,4 +77,34 @@ const addIngredientForm = async (user, recipeId) => {
   });
 };
 
-export { setupUpdateForm, addIngredientForm };
+// function to remove one recipe
+const removeRecipe = async (user, recipeId) => {
+  // unsubscribe();
+  const recipes = await getRecipes(user);
+  const index = recipes.findIndex(i => i.id === recipeId);
+  if (index > -1) {
+    recipes.splice(index, 1);
+    //saving to database
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid)
+      .set({
+        recipes: recipes
+      })
+      .then(() => {
+        location.assign("/recipes.html");
+      });
+  }
+};
+
+// // wire up filters and remove button
+// const wireupUpdateElements = (user, recipeId) => {
+//   const removeButton = document.querySelector("#remove-recipe");
+//   const textFilterIngredients = document.querySelector(
+//     "#text-filter-ingredients"
+//   );
+//   const checkboxFilter = document.querySelector("#hide-completed");
+// };
+
+export { setupUpdateForm, addIngredientForm, removeRecipe };
