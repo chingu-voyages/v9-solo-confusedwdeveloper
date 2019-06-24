@@ -27,7 +27,17 @@ firebase.auth().onAuthStateChanged(function(user) {
       .collection("users")
       .doc(user.uid)
       .onSnapshot(doc => {
-        const recipes = doc.data().recipes;
+        try {
+          const recipes = doc.data().recipes;
+        } catch (e) {
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(user.uid)
+            .set({
+              recipes: []
+            });
+        }
         renderRecipes(recipes);
 
         //setting up some event Listeners
