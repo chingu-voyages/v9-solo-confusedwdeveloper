@@ -51,26 +51,28 @@ const addIngredientForm = async (user, recipeId) => {
     e.preventDefault();
     const text = e.target.elements.newIngredient.value.trim();
     const id = uuidv4();
-    const ingredient = {
-      id,
-      text,
-      completed: false
-    };
-    //adding to array
-    ingredients.push(ingredient);
+    if (text) {
+      const ingredient = {
+        id,
+        text,
+        completed: false
+      };
+      //adding to array
+      ingredients.push(ingredient);
 
-    // updating timestamp
-    recipe.updatedAt = moment().valueOf();
+      // updating timestamp
+      recipe.updatedAt = moment().valueOf();
 
-    //saving to database
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(user.uid)
-      .set({
-        recipes: recipes
-      });
-    form.reset();
+      //saving to database
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(user.uid)
+        .set({
+          recipes: recipes
+        });
+      form.reset();
+    }
   });
 };
 

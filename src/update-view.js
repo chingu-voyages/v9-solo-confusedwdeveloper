@@ -11,8 +11,8 @@ const removeIngredient = (recipes, recipeId, ingredientId, user) => {
   const recipe = recipes.find(i => i.id === recipeId);
   const ingredients = recipe.ingredients;
   const index = ingredients.findIndex(i => i.id === ingredientId);
-  if (ingredientId > -1) {
-    ingredients.splice(index, -1);
+  if (index > -1) {
+    ingredients.splice(index, 1);
     recipe.updatedAt = moment().valueOf();
     firebase
       .firestore()

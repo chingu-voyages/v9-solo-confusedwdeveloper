@@ -20,7 +20,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     setUpNavbar(user);
     setupCreateRecipeButton(user);
-    console.log(user);
 
     //setting up real time update
     let unsubscribe = firebase
