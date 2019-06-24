@@ -34,4 +34,4 @@ const removeRecipe = async (user, recipeId) => {
 //   const checkboxFilter = document.querySelector("#hide-completed");
 // };
 
-export { setupUpdateForm, addIngredientForm, removeRecipe };
+export { removeRecipe };

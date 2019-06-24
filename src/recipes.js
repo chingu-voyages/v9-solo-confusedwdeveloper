@@ -37,6 +37,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             .set({
               recipes: []
             });
+          const recipes = [];
         }
         renderRecipes(recipes);
 
