@@ -27,8 +27,9 @@ firebase.auth().onAuthStateChanged(function(user) {
       .collection("users")
       .doc(user.uid)
       .onSnapshot(doc => {
+        let recipes;
         try {
-          const recipes = doc.data().recipes;
+          recipes = doc.data().recipes;
         } catch (e) {
           firebase
             .firestore()
@@ -37,7 +38,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             .set({
               recipes: []
             });
-          const recipes = [];
+          recipes = [];
         }
         renderRecipes(recipes);
 
