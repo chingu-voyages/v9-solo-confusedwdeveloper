@@ -7,9 +7,6 @@ import "firebase/firestore";
 import moment from "moment";
 import { getRecipes } from "./ui";
 import uuidv4 from "uuid/v4";
-import { renderUpdate } from "./update-view";
-import { getFilters, setFilters } from "./filters";
-import { unsubscribe } from "./update";
 
 // function to setup update form
 const setupUpdateForm = async (user, recipeId) => {
@@ -101,9 +98,7 @@ const removeRecipe = async (user, recipeId) => {
 // // wire up filters and remove button
 // const wireupUpdateElements = (user, recipeId) => {
 //   const removeButton = document.querySelector("#remove-recipe");
-//   const textFilterIngredients = document.querySelector(
-//     "#text-filter-ingredients"
-//   );
+
 //   const checkboxFilter = document.querySelector("#hide-completed");
 // };
 

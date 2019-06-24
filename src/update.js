@@ -9,6 +9,7 @@ import {
   removeRecipe
 } from "./setup-update";
 import { renderUpdate } from "./update-view";
+import { setFilters } from "./filters";
 
 // Add the Firebase products that you want to use
 import "firebase/auth";
@@ -16,6 +17,12 @@ import "firebase/firestore";
 import firebaseConfig from "./config";
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+// selecting DOM elements
+const textFilterIngredients = document.querySelector(
+  "#text-filter-ingredients"
+);
+const checkboxFilter = document.querySelector("#hide-completed");
 
 const recipeId = location.hash.substring(1);
 
@@ -34,7 +41,25 @@ firebase.auth().onAuthStateChanged(function(user) {
       .doc(user.uid)
       .onSnapshot(doc => {
         const recipes = doc.data().recipes;
-        renderUpdate(recipes, recipeId);
+        renderUpdate(recipes, recipeId, user);
+
+        // event listener on ingredient search filter
+
+        textFilterIngredients.addEventListener("input", e => {
+          setFilters({
+            ingredientsSearchText: e.target.value.trim()
+          });
+          renderUpdate(recipes, recipeId, user);
+        });
+
+        // hide completed checkbox
+
+        checkboxFilter.addEventListener("change", e => {
+          setFilters({
+            hideCompleted: e.target.checked
+          });
+          renderUpdate(recipes, recipeId, user);
+        });
       });
 
     setupUpdateForm(user, recipeId);
