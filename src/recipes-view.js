@@ -106,12 +106,14 @@ const renderRecipes = recipes => {
   rootEl.innerHTML = "";
   if (recipes.length > 0) {
     recipes.forEach(recipe => {
+      rootEl.classList.add("row");
       const divEl = generateRecipeCard(recipe);
       rootEl.appendChild(divEl);
     });
   } else {
     const notificationEl = document.createElement("h3");
     notificationEl.textContent = "You have no recipes.";
+    rootEl.classList.remove("row");
     notificationEl.classList.add("text-center", "text-white");
     rootEl.appendChild(notificationEl);
   }
